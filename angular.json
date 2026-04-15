@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": "d9a5196f-8ea3-4dde-b88a-4f28077964ff"
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -25,8 +26,13 @@
               }
             ],
             "styles": [
-              "src/styles.css"
-            ]
+              "node_modules/minireset.css/minireset.css",
+              "src/styles.css",
+              "node_modules/igniteui-angular/styles/igniteui-angular.css"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["node_modules"]
+            }
           },
           "configurations": {
             "production": {
@@ -65,7 +71,10 @@
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular/build:unit-test"
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "styles": ["node_modules/igniteui-angular/styles/igniteui-angular.css"]
+          }
         }
       }
     }

@@ -1,0 +1,141 @@
+:root {
+  --gauge-font-brush: #5C5D60;
+  --gauges-track-brush: #e6e8ef;    
+  --red-color: #e86e6b;
+  --yellow-color: #fed663;
+  --green-color: #84c689;
+  --bulletgraph-target-value-brush: #2E2E30;
+  --bulletgraph-value-brush: #2E2E30;
+  --gauges-font-family: 'Roboto', sans-serif;
+
+
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  font-family: var(--gauges-font-family);
+}
+
+.gauges-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: var(--gauges-font-family);
+}
+
+h1 {
+  margin-bottom: 2rem;
+}
+
+.gauge-section {
+  margin-bottom: 2.5rem;
+}
+
+.gauges-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.gauges-flex .gauge-section {
+  margin-bottom: 0;
+  flex: 1 1 300px;
+}
+
+.gauge-section h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  color: #444;
+}
+
+igx-radial-gauge {
+  display: block;
+}
+
+.bullet-graph-section {
+  max-width: 700px;
+}
+
+.linear-gauge-section {
+  max-width: 700px;
+}
+
+.lg-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+  margin: 0 0 0.25rem 0;
+}
+
+.lg-value {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 0.25rem 0;
+  line-height: 1;
+}
+
+.bg-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+  margin: 0 0 0.25rem 0;
+}
+
+.bg-value {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 0.5rem 0;
+  line-height: 1;
+}
+
+
+
+igx-linear-gauge {
+    --backing-brush: transparent;
+    --backing-outline: transparent;
+    --font-brush: var(--gauge-font-brush);
+    --minor-tick-brush: transparent;
+    --needle-brush: transparent;
+    --needle-outline: transparent;
+    --range-brushes: #84c689, #fed663, #e86e6b;
+    --range-outlines: #84c689, #fed663, #e86e6b;
+    --scale-brush: transparent;
+    --tick-brush: transparent;
+    --scale-outline: transparent;
+    --ig-theme: material;
+    --ig-theme-variant: light;
+}
+
+igx-bullet-graph {
+    --backing-brush: transparent;
+    --backing-outline: transparent;
+    --font-brush: var(--gauge-font-brush);
+    --minor-tick-brush: transparent;
+    --range-brushes: #84c689, #fed663, #e86e6b;
+    --range-outlines: #84c689, #fed663, #e86e6b;
+    --scale-background-brush: transparent;
+    --scale-background-outline: transparent;
+    --target-value-brush: var(--bulletgraph-target-value-brush);
+    --tick-brush: transparent;
+    --value-brush: var(--bulletgraph-value-brush);
+    --ig-theme: material;
+    --ig-theme-variant: light;
+}
+
+igx-radial-gauge {
+    --backing-brush: transparent;
+    --backing-outline: transparent;
+    --font-brush: var(--gauge-font-brush);
+    --minor-tick-brush: transparent;
+    --needle-brush: #268bd2;
+    --needle-outline: #2aa198;
+    --range-brushes: #84c689, #fed663, #e86e6b;
+    --range-outlines: #84c689, #fed663, #e86e6b;
+    --scale-brush: #eee8d5;
+    --tick-brush: #93a1a1;
+    --needle-pivot-brush: #cb4b16;
+    --needle-pivot-outline: #dc322f;
+    --ig-theme: material;
+    --ig-theme-variant: light;
+}
