@@ -1,40 +1,41 @@
-:root {
-  --gauge-font-brush: #5C5D60;
-  --gauges-track-brush: #e6e8ef;    
-  --red-color: #e86e6b;
-  --yellow-color: #fed663;
-  --green-color: #84c689;
-  --bulletgraph-target-value-brush: #2E2E30;
-  --bulletgraph-value-brush: #2E2E30;
-  --gauges-font-family: 'Roboto', sans-serif;
-
-
-}
-
 p, h1, h2, h3, h4, h5, h6 {
-  font-family: var(--gauges-font-family);
+  font-family: 'Roboto', sans-serif;
+  color: #2E2E30;
 }
 
 .gauges-page {
   max-width: 800px;
   margin: 2rem auto;
   padding: 0 1rem;
-  font-family: var(--gauges-font-family);
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.gauges-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 h1 {
   margin-bottom: 2rem;
 }
 
-.gauge-section {
-  margin-bottom: 2.5rem;
+
+.radial-gauges-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.gauges-flex {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+.radial-gauges-row .gauge-section {
+  margin-bottom: 0;
 }
+
 
 .gauges-flex .gauge-section {
   margin-bottom: 0;
@@ -44,7 +45,7 @@ h1 {
 .gauge-section h2 {
   margin-bottom: 0.75rem;
   font-size: 1.1rem;
-  color: #444;
+  color: #2E2E30;
 }
 
 igx-radial-gauge {
@@ -59,50 +60,41 @@ igx-radial-gauge {
   max-width: 700px;
 }
 
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 0 1rem;
+}
+
 .lg-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: #222;
-  margin: 0 0 0.25rem 0;
+    line-height: 1.375rem;
+
+  color: #2E2E30;
+  margin: 0;
 }
 
 .lg-value {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 700;
-  color: #111;
-  margin: 0 0 0.25rem 0;
-  line-height: 1;
+  color: #2E2E30;
+  margin: 0;
+  line-height: 2.5rem;
 }
-
-.bg-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #222;
-  margin: 0 0 0.25rem 0;
-}
-
-.bg-value {
-  font-size: 3rem;
-  font-weight: 700;
-  color: #111;
-  margin: 0 0 0.5rem 0;
-  line-height: 1;
-}
-
-
 
 igx-linear-gauge {
     --backing-brush: transparent;
     --backing-outline: transparent;
-    --font-brush: var(--gauge-font-brush);
+    --font-brush: #5C5D60;
     --minor-tick-brush: transparent;
     --needle-brush: transparent;
     --needle-outline: transparent;
     --range-brushes: #84c689, #fed663, #e86e6b;
     --range-outlines: #84c689, #fed663, #e86e6b;
-    --scale-brush: transparent;
-    --tick-brush: transparent;
-    --scale-outline: transparent;
+    --scale-brush: #e0e0e8;
+    --scale-outline: #e0e0e8;    
+    --tick-brush: white;
     --ig-theme: material;
     --ig-theme-variant: light;
 }
@@ -110,15 +102,15 @@ igx-linear-gauge {
 igx-bullet-graph {
     --backing-brush: transparent;
     --backing-outline: transparent;
-    --font-brush: var(--gauge-font-brush);
+    --font-brush: #5C5D60;
     --minor-tick-brush: transparent;
     --range-brushes: #84c689, #fed663, #e86e6b;
     --range-outlines: #84c689, #fed663, #e86e6b;
-    --scale-background-brush: transparent;
-    --scale-background-outline: transparent;
-    --target-value-brush: var(--bulletgraph-target-value-brush);
-    --tick-brush: transparent;
-    --value-brush: var(--bulletgraph-value-brush);
+    --scale-background-brush: red;
+    --scale-background-outline: red;
+    --target-value-brush: #2E2E30;
+    --tick-brush: white;
+    --value-brush: #2E2E30;
     --ig-theme: material;
     --ig-theme-variant: light;
 }
@@ -126,16 +118,52 @@ igx-bullet-graph {
 igx-radial-gauge {
     --backing-brush: transparent;
     --backing-outline: transparent;
-    --font-brush: var(--gauge-font-brush);
+    --font-brush: #5C5D60;
     --minor-tick-brush: transparent;
-    --needle-brush: #268bd2;
-    --needle-outline: #2aa198;
+    --needle-brush: #2E2E30;
+    --needle-outline: #fff;
     --range-brushes: #84c689, #fed663, #e86e6b;
     --range-outlines: #84c689, #fed663, #e86e6b;
-    --scale-brush: #eee8d5;
-    --tick-brush: #93a1a1;
-    --needle-pivot-brush: #cb4b16;
-    --needle-pivot-outline: #dc322f;
+    --scale-brush: #e0e0e8;
+    --tick-brush: white;
+    --needle-pivot-brush: transparent;
+    --needle-pivot-outline: transparent;
     --ig-theme: material;
     --ig-theme-variant: light;
+}
+
+#gauges-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 700px;
+}
+
+.chart-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chart-y-label {
+  width: 40px;
+  text-align: right;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  color: #2E2E30;
+  flex-shrink: 0;
+}
+
+.chart-x-labels {
+  flex: 1;
+  position: relative;
+  height: 24px;
+}
+
+.chart-x-tick {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  color: #5C5D60;
 }
