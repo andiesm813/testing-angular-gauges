@@ -54,6 +54,23 @@ igx-radial-gauge {
   max-width: 700px;
 }
 
+.bullet-graph-wrap {
+  position: relative;
+}
+
+.bullet-target-diamond {
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  border: 5px solid;
+  border-radius: 3px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  pointer-events: none;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
 .linear-gauge-section {
   max-width: 700px;
 }
@@ -82,53 +99,26 @@ igx-radial-gauge {
 }
 
 igx-linear-gauge {
-    --backing-brush: transparent;
-    --backing-outline: transparent;
-    --font-brush: #5C5D60;
-    --minor-tick-brush: transparent;
-    --needle-brush: transparent;
-    --needle-outline: transparent;
-    --range-brushes: #84c689, #fed663, #e86e6b;
-    --range-outlines: #84c689, #fed663, #e86e6b;
-    --scale-brush: #e0e0e8;
-    --scale-outline: #e0e0e8;    
-    --tick-brush: white;
-    --ig-theme: material;
-    --ig-theme-variant: light;
+  --backing-brush:    transparent;
+  --backing-outline:  transparent;
+  --minor-tick-brush: transparent;
+  --ig-theme: material;
 }
 
 igx-bullet-graph {
-    --backing-brush: transparent;
-    --backing-outline: transparent;
-    --font-brush: #5C5D60;
-    --minor-tick-brush: transparent;
-    --range-brushes: #84c689, #fed663, #e86e6b;
-    --range-outlines: #84c689, #fed663, #e86e6b;
-    --scale-background-brush: #e0e0e8;
-    --scale-background-outline: #e0e0e8;
-    --target-value-brush: #2E2E30;
-    --target-value-outline: #2E2E30;
-    --tick-brush: white;
-    --value-brush: #2E2E30;
-    --ig-theme: material;
-    --ig-theme-variant: light;
+  --backing-brush:    transparent;
+  --backing-outline:  transparent;
+  --minor-tick-brush: transparent;
+  --ig-theme: material;
 }
 
 igx-radial-gauge {
-    --backing-brush: transparent;
-    --backing-outline: transparent;
-    --font-brush: #5C5D60;
-    --minor-tick-brush: transparent;
-    --needle-brush: #2E2E30;
-    --needle-outline: #fff;
-    --range-brushes: #84c689, #fed663, #e86e6b;
-    --range-outlines: #84c689, #fed663, #e86e6b;
-    --scale-brush: #e0e0e8;
-    --tick-brush: white;
-    --needle-pivot-brush: transparent;
-    --needle-pivot-outline: transparent;
-    --ig-theme: material;
-    --ig-theme-variant: light;
+  --backing-brush:        transparent;
+  --backing-outline:      transparent;
+  --minor-tick-brush:     transparent;
+  --needle-pivot-brush:   transparent;
+  --needle-pivot-outline: transparent;
+  --ig-theme: material;
 }
 
 #gauges-chart {
@@ -145,7 +135,7 @@ igx-radial-gauge {
 }
 
 .chart-y-label {
-  width: 40px;
+  width: 56px;
   text-align: right;
   font-size: 14px;
   font-family: 'Roboto', sans-serif;
@@ -166,3 +156,27 @@ igx-radial-gauge {
   font-family: 'Roboto', sans-serif;
   color: #5C5D60;
 }
+
+/* ── Dark mode ───────────────────────────────────────── */
+
+/* Surface-contrast text: hierarchy from primary value → title → secondary */
+:host-context(.theme-dark) .lg-value {
+  color: #f0f0f8;
+}
+
+:host-context(.theme-dark) .lg-title,
+:host-context(.theme-dark) .gauge-section h2,
+:host-context(.theme-dark) p,
+:host-context(.theme-dark) h4,
+:host-context(.theme-dark) h6 {
+  color: #c0c0d4;
+}
+
+:host-context(.theme-dark) .chart-y-label {
+  color: #c0c0d4;
+}
+
+:host-context(.theme-dark) .chart-x-tick {
+  color: #7878a0;
+}
+

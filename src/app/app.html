@@ -1,4 +1,4 @@
-<div class="layout">
+<div class="layout" [class.theme-dark]="themeService.darkMode()">
   <nav class="sidebar">
     <div class="sidebar-header">
       <span class="sidebar-logo">&#9632;</span>
@@ -27,6 +27,21 @@
         </a>
       </li>
     </ul>
+    <div class="sidebar-footer">
+      <button class="theme-toggle" (click)="themeService.toggle()" [attr.aria-pressed]="themeService.darkMode()">
+        <svg class="theme-icon" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          @if (themeService.darkMode()) {
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+          } @else {
+            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 1.78a1 1 0 011.415 1.415l-.707.707a1 1 0 01-1.415-1.415l.707-.707zM18 9a1 1 0 110 2h-1a1 1 0 110-2h1zM4.93 14.364l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM10 16a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM3 10a1 1 0 110-2h1a1 1 0 110 2H3zm11.364-5.657l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414-1.414zM5.636 14.364a1 1 0 010-1.414l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414 0zM10 6a4 4 0 100 8 4 4 0 000-8z"/>
+          }
+        </svg>
+        <span class="theme-toggle-label">{{ themeService.darkMode() ? 'Dark' : 'Light' }}</span>
+        <div class="toggle-track" aria-hidden="true">
+          <div class="toggle-thumb"></div>
+        </div>
+      </button>
+    </div>
   </nav>
   <main class="content">
     <router-outlet />

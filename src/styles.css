@@ -4,3 +4,31 @@
 * {
   font-family: 'Roboto', sans-serif;
 }
+
+/* ── Gauge palette tokens ────────────────────────────── */
+/* Cascade from .layout.theme-dark into all gauge components */
+
+:root {
+  /* Track: light greyish. Ticks: exact content background so they read as separators. */
+  --gauge-track:         #e0e0e8;
+  --gauge-tick:          #f5f5f7;
+  --gauge-font:          #5C5D60;
+  --gauge-needle:        #2E2E30;
+  --gauge-needle-out:    #ffffff;
+  --gauge-value-bar:     #2E2E30;
+  --gauge-target:        #2E2E30;
+  --gauge-theme-variant: light;
+}
+
+.theme-dark {
+  /* Track: neutral dark — same hue family as sidebar (#1e1e22) and content (#16181c).
+     Ticks: match the dark content background exactly, so they cut through as separators. */
+  --gauge-track:         #2a2a34;
+  --gauge-tick:          #16181c;
+  --gauge-font:          #c0c0d4;
+  --gauge-needle:        #f0f0f8;
+  --gauge-needle-out:    #16181c;
+  --gauge-value-bar:     #f0f0f8;
+  --gauge-target:        #f0f0f8;
+  --gauge-theme-variant: dark;
+}

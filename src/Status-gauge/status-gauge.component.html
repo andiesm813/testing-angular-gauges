@@ -1,24 +1,9 @@
-<div class="app-shell" [class.theme-dark]="darkMode">
+<div class="app-shell" [class.theme-dark]="themeService.darkMode()">
   <header class="app-toolbar">
     <div class="app-heading-block">
-      <p class="app-kicker">Monitor theme</p>
+      <p class="app-kicker">Sensor Monitor</p>
       <h1 class="app-title">Ignite UI Gauge States</h1>
     </div>
-
-    <button
-      type="button"
-      class="theme-switch"
-      role="switch"
-      [attr.aria-checked]="darkMode"
-      [attr.aria-label]="darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
-      (click)="toggleDarkMode()"
-    >
-      <span class="theme-switch-label theme-switch-label-light">Light</span>
-      <span class="theme-switch-track" aria-hidden="true">
-        <span class="theme-switch-thumb"></span>
-      </span>
-      <span class="theme-switch-label theme-switch-label-dark">Dark</span>
-    </button>
   </header>
 
   <main class="dashboard">
@@ -26,126 +11,131 @@
       <h2 class="panel-title">Ignite UI Linear Gauges</h2>
 
       <div class="linear-gauges-column">
-        <article class="gauge-card" *ngFor="let gauge of gauges">
-          <div class="gauge-header">
-            <h3 class="gauge-title">{{ gauge.title }}</h3>
-          </div>
+        @for (gauge of gauges; track gauge.id) {
+          <article class="gauge-card">
+            <div class="gauge-header">
+              <h3 class="gauge-title">{{ gauge.title }}</h3>
+            </div>
 
-          <h1 class="value-display">
-            {{ gauge.value }}
-            <span>{{ gauge.units }}</span>
-          </h1>
-
-          <igx-linear-gauge
-            width="100%"
-            height="96px"
-            [minimumValue]="gauge.min"
-            [maximumValue]="gauge.max"
-            [value]="gauge.value"
-            [interval]="1"
-            [labelInterval]="1"
-            [labelExtent]="0.14"
-            [scaleStartExtent]="0.02"
-            [scaleEndExtent]="0.98"
-            [minorTickCount]="0"
-            [tickStrokeThickness]="0"
-            font="400 14px Roboto, sans-serif"
-            [fontBrush]="gaugeLabelBrush"
-            [backingBrush]="gaugeSurfaceBrush"
-            [backingOutline]="gaugeSurfaceOutlineBrush"
-            [scaleBrush]="gaugeSurfaceBrush"
-            [scaleOutline]="gaugeSurfaceOutlineBrush"
-            [backingInnerExtent]="0.30"
-            [backingOuterExtent]="0.70"
-            needleShape="Triangle"
-            [needleBrush]="gaugeNeedleBrush"
-            [needleOutline]="gaugeNeedleOutlineBrush"
-            [needleBreadth]="30"
-            [needleInnerExtent]="0.52"
-            [needleOuterExtent]="0.78"
-            [needleStrokeThickness]="4"
-            (formatLabel)="formatThresholdLabel($event, gauge)"
-          >
-            <igx-linear-graph-range
-              *ngFor="let range of gauge.ranges"
-              [startValue]="displayRangeStart(gauge, range)"
-              [endValue]="displayRangeEnd(gauge, range)"
-              [brush]="rangeBrush(gauge, range)"
-              [outline]="rangeOutline(gauge, range)"
-              [strokeThickness]="1"
-              [innerStartExtent]="rangeInnerExtent(gauge, range)"
-              [innerEndExtent]="rangeInnerExtent(gauge, range)"
-              [outerStartExtent]="rangeOuterExtent(gauge, range)"
-              [outerEndExtent]="rangeOuterExtent(gauge, range)"
-            />
-          </igx-linear-gauge>
-        </article>
-      </div>
-    </section>
-    <section class="panel radial-panel">
-      <h2 class="panel-title">Ignite UI Radial Gauges</h2>
-
-      <div class="radial-gauges-row">
-        <article class="gauge-card radial-gauge-card" *ngFor="let gauge of gauges">
-          <div class="gauge-header radial-gauge-header">
-            <h3 class="gauge-title">{{ gauge.title }}</h3>
-          </div>
-
-          <div class="radial-gauge-visual">
-            <h1 class="value-display radial-value-display">
+            <h1 class="value-display">
               {{ gauge.value }}
               <span>{{ gauge.units }}</span>
             </h1>
 
-            <igx-radial-gauge
+            <igx-linear-gauge
               width="100%"
-              height="240px"
+              height="57px"
               [minimumValue]="gauge.min"
               [maximumValue]="gauge.max"
               [value]="gauge.value"
-              [interval]="radialInterval(gauge)"
-              [labelInterval]="radialInterval(gauge)"
-              [labelExtent]="0.84"
-              [scaleStartAngle]="180"
-              [scaleEndAngle]="0"
-              [backingBrush]="gaugeSurfaceBrush"
-              [backingOutline]="gaugeSurfaceOutlineBrush"
-              [scaleStartExtent]="0.58"
-              [scaleEndExtent]="0.70"
-              [scaleBrush]="gaugeSurfaceBrush"
-              scaleOversweep="0"
+              [interval]="1"
+              [labelInterval]="1"
+              [labelExtent]="-0.1"
+              [scaleStartExtent]="0.02"
+              [scaleEndExtent]="0.96"
               [minorTickCount]="0"
-              [tickStrokeThickness]="0"
-              [tickStartExtent]="0.56"
-              [tickEndExtent]="0.72"
+              [tickStrokeThickness]="2"
               font="400 14px Roboto, sans-serif"
               [fontBrush]="gaugeLabelBrush"
+              [backingBrush]="gaugeSurfaceBrush"
+              [backingOutline]="gaugeSurfaceOutlineBrush"
+              [scaleBrush]="gaugeSurfaceBrush"
+              [scaleOutline]="gaugeSurfaceOutlineBrush"
               needleShape="Triangle"
-              needlePivotShape="None"
               [needleBrush]="gaugeNeedleBrush"
               [needleOutline]="gaugeNeedleOutlineBrush"
-              [needleStartExtent]="0.45"
-              [needleEndExtent]="0.62"
-              [needleStartWidthRatio]="0.25"
-              [needleEndWidthRatio]="0.02"
+              [needleBreadth]="32"
+              [needleInnerExtent]="0.38"
+              [needleOuterExtent]="0.95"
               [needleStrokeThickness]="4"
               (formatLabel)="formatThresholdLabel($event, gauge)"
             >
-              <igx-radial-gauge-range
-                *ngFor="let range of gauge.ranges"
-                [startValue]="displayRadialRangeStart(gauge, range)"
-                [endValue]="displayRadialRangeEnd(gauge, range)"
-                [brush]="rangeBrush(gauge, range)"
-                [outline]="rangeOutline(gauge, range)"
-                [strokeThickness]="1"
-                [innerStartExtent]="radialInnerExtent(gauge, range)"
-                [innerEndExtent]="radialInnerExtent(gauge, range)"
-                [outerStartExtent]="radialOuterExtent(gauge, range)"
-                [outerEndExtent]="radialOuterExtent(gauge, range)"
-              />
-            </igx-radial-gauge>
-          </div>
-        </article>
+              @for (range of gauge.ranges; track $index) {
+                <igx-linear-graph-range
+                  [startValue]="displayRangeStart(gauge, range)"
+                  [endValue]="displayRangeEnd(gauge, range)"
+                  [brush]="rangeBrush(gauge, range)"
+                  [outline]="rangeOutline(gauge, range)"
+                  [strokeThickness]="1"
+                  [innerStartExtent]="rangeInnerExtent(gauge, range)"
+                  [innerEndExtent]="rangeInnerExtent(gauge, range)"
+                  [outerStartExtent]="rangeOuterExtent(gauge, range)"
+                  [outerEndExtent]="rangeOuterExtent(gauge, range)"
+                />
+              }
+            </igx-linear-gauge>
+          </article>
+        }
+      </div>
+    </section>
+
+    <section class="panel radial-panel">
+      <h2 class="panel-title">Ignite UI Radial Gauges</h2>
+
+      <div class="radial-gauges-row">
+        @for (gauge of gauges; track gauge.id) {
+          <article class="gauge-card radial-gauge-card">
+            <div class="gauge-header radial-gauge-header">
+              <h3 class="gauge-title">{{ gauge.title }}</h3>
+            </div>
+
+            <div class="radial-gauge-visual">
+              <h1 class="value-display radial-value-display">
+                {{ gauge.value }}
+                <span>{{ gauge.units }}</span>
+              </h1>
+
+              <igx-radial-gauge
+                width="100%"
+                height="240px"
+                [minimumValue]="gauge.min"
+                [maximumValue]="gauge.max"
+                [value]="gauge.value"
+                [interval]="radialInterval(gauge)"
+                [labelInterval]="radialInterval(gauge)"
+                [labelExtent]="0.84"
+                [scaleStartAngle]="180"
+                [scaleEndAngle]="0"
+                [backingBrush]="gaugeSurfaceBrush"
+                [backingOutline]="gaugeSurfaceOutlineBrush"
+                [scaleStartExtent]="0.58"
+                [scaleEndExtent]="0.70"
+                [scaleBrush]="gaugeSurfaceBrush"
+                scaleOversweep="0"
+                [minorTickCount]="0"
+                [tickStrokeThickness]="0"
+                [tickStartExtent]="0.56"
+                [tickEndExtent]="0.72"
+                font="400 14px Roboto, sans-serif"
+                [fontBrush]="gaugeLabelBrush"
+                needleShape="Triangle"
+                needlePivotShape="None"
+                [needleBrush]="gaugeNeedleBrush"
+                [needleOutline]="gaugeNeedleOutlineBrush"
+                [needleStartExtent]="0.45"
+                [needleEndExtent]="0.62"
+                [needleStartWidthRatio]="0.25"
+                [needleEndWidthRatio]="0.02"
+                [needleStrokeThickness]="4"
+                (formatLabel)="formatThresholdLabel($event, gauge)"
+              >
+                @for (range of gauge.ranges; track $index) {
+                  <igx-radial-gauge-range
+                    [startValue]="displayRadialRangeStart(gauge, range)"
+                    [endValue]="displayRadialRangeEnd(gauge, range)"
+                    [brush]="rangeBrush(gauge, range)"
+                    [outline]="rangeOutline(gauge, range)"
+                    [strokeThickness]="1"
+                    [innerStartExtent]="radialInnerExtent(gauge, range)"
+                    [innerEndExtent]="radialInnerExtent(gauge, range)"
+                    [outerStartExtent]="radialOuterExtent(gauge, range)"
+                    [outerEndExtent]="radialOuterExtent(gauge, range)"
+                  />
+                }
+              </igx-radial-gauge>
+            </div>
+          </article>
+        }
       </div>
     </section>
   </main>
