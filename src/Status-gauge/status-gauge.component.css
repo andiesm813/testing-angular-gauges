@@ -1,0 +1,336 @@
+:host {
+	display: block;
+	min-height: 100dvh;
+	font-family: 'Roboto', sans-serif;
+	font-size: 0.875rem;
+}
+
+.app-shell {
+	--bg-top-accent: color-mix(in srgb, var(--ig-primary-300) 34%, transparent);
+	--bg-main-start: var(--ig-surface-50);
+	--bg-main-end: color-mix(in srgb, var(--ig-surface-100) 88%, var(--ig-primary-100) 12%);
+	--text-strong: var(--ig-gray-900);
+	--text-muted: color-mix(in srgb, var(--ig-gray-900) 76%, transparent);
+	--text-soft: color-mix(in srgb, var(--ig-gray-900) 58%, transparent);
+	--card-bg: color-mix(in srgb, var(--ig-surface-500) 92%, var(--ig-primary-100) 8%);
+	--card-border: color-mix(in srgb, var(--ig-gray-900) 12%, transparent);
+	--switch-bg: color-mix(in srgb, var(--ig-surface-500) 82%, transparent);
+	--switch-border: color-mix(in srgb, var(--ig-gray-900) 14%, transparent);
+	--switch-thumb: var(--ig-surface-500-contrast);
+	--switch-active: var(--ig-primary-500);
+	--gauge-backing: var(--bg-main-start);
+	--gauge-backing-outline: var(--bg-main-start);
+	--gauge-needle: var(--ig-surface-500-contrast);
+	--gauge-needle-outline: var(--bg-main-start);
+	--gauge-font: var(--ig-surface-500-contrast);
+	--gauge-scale: var(--bg-main-start);
+	--gauge-scale-outline: var(--bg-main-start);
+	min-height: 100dvh;
+	background: var(--card-bg);
+	color: var(--text-strong);
+	transition: background-color 180ms ease, color 180ms ease;
+}
+
+.app-shell.theme-dark {
+	--ig-primary-100: hsl(from var(--ig-primary-500) h calc(s * 0.8) calc(l * 1.66));
+	--ig-primary-300: hsl(from var(--ig-primary-500) h calc(s * 0.73) calc(l * 1.19));
+	--ig-primary-500: #0d6efd;
+	--ig-primary-900: hsl(from var(--ig-primary-500) h calc(s * 1.26) calc(l * 0.64));
+	--ig-gray-500: hsl(210, 13.79%, 74%);
+	--ig-gray-700: hsl(from var(--ig-gray-500) h s 93%);
+	--ig-gray-900: hsl(from var(--ig-gray-500) h s 98%);
+	--ig-surface-50: hsl(from var(--ig-surface-500) h calc(s * 1.23) calc(l * 1.78));
+	--ig-surface-100: hsl(from var(--ig-surface-500) h calc(s * 0.8) calc(l * 1.66));
+	--ig-surface-400: hsl(from var(--ig-surface-500) h calc(s * 0.875) calc(l * 1.08));
+	--ig-surface-500: #212529;
+	--ig-surface-500-contrast: #f8f9fa;
+	--bg-main-start: color-mix(in srgb, var(--ig-surface-500) 92%, black 8%);
+	--bg-main-end: color-mix(in srgb, var(--ig-surface-400) 94%, var(--ig-primary-900) 6%);
+	--card-bg: color-mix(in srgb, var(--ig-surface-400) 94%, var(--ig-primary-500) 6%);
+	--card-border: color-mix(in srgb, var(--ig-surface-500-contrast) 18%, transparent);
+	--switch-bg: color-mix(in srgb, var(--ig-surface-400) 88%, transparent);
+	--switch-border: color-mix(in srgb, var(--ig-surface-500-contrast) 18%, transparent);
+}
+
+.app-toolbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1.5rem;
+	padding: 1.25rem 2.5rem 0;
+}
+
+.app-heading-block {
+	display: grid;
+	gap: 0.25rem;
+}
+
+.app-kicker {
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+	font-size: 0.875rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--text-soft);
+}
+
+.app-title {
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.theme-switch {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.65rem 0.9rem;
+	border: 1px solid var(--switch-border);
+	border-radius: 999px;
+	background: var(--switch-bg);
+	color: var(--text-strong);
+	font-family: 'Roboto', sans-serif;
+	font-size: 0.875rem;
+	font-weight: 700;
+	backdrop-filter: blur(12px);
+	cursor: pointer;
+	transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.theme-switch:hover {
+	transform: translateY(-1px);
+}
+
+.theme-switch:focus-visible {
+	outline: 3px solid color-mix(in srgb, var(--switch-active) 65%, transparent);
+	outline-offset: 3px;
+}
+
+.theme-switch-label {
+	font-family: 'Roboto', sans-serif;
+	font-size: 0.875rem;
+	line-height: 1;
+	color: var(--text-soft);
+}
+
+.theme-switch[aria-checked='false'] .theme-switch-label-light,
+.theme-switch[aria-checked='true'] .theme-switch-label-dark {
+	color: var(--text-strong);
+}
+
+.theme-switch-track {
+	position: relative;
+	width: 3rem;
+	height: 1.7rem;
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--switch-active) 24%, transparent);
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--switch-active) 22%, transparent);
+}
+
+.theme-switch-thumb {
+	position: absolute;
+	top: 0.2rem;
+	left: 0.22rem;
+	width: 1.3rem;
+	height: 1.3rem;
+	border-radius: 50%;
+	background: var(--switch-thumb);
+	transition: transform 180ms ease;
+}
+
+.theme-switch[aria-checked='true'] .theme-switch-thumb {
+	transform: translateX(1.28rem);
+}
+
+.dashboard {
+	display: flex;
+	align-items: flex-start;
+	gap: 1.5rem;
+	min-height: 100dvh;
+	padding: 1.5rem 1rem 2rem;
+}
+
+.panel {
+	display: flex;
+	flex-direction: column;
+	flex: 1 0 0;
+	min-width: 576px;
+	padding: 1.5rem;
+	gap: 1rem;
+}
+
+
+.panel-title {
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: var(--text-strong);
+}
+
+.panel-subtitle {
+	margin: 0.35rem 0 1.4rem;
+	font-family: 'Roboto', sans-serif;
+	font-size: 0.875rem;
+	color: var(--text-muted);
+}
+
+.linear-gauges-column,
+.radial-gauges-row {
+	display: grid;
+	gap: 1rem;
+}
+
+.gauge-card {
+	border: 1px solid var(--card-border);
+	border-radius: 14px;
+	padding: 1rem;
+	background: var(--bg-main-start);
+	transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.gauge-header {
+	display: flex;
+	justify-content: flex-start;
+	align-items: baseline;
+	gap: 1rem;
+}
+
+
+.gauge-title {
+	margin: 0 0 0.35rem;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--text-strong);
+}
+
+igx-linear-gauge,
+igx-radial-gauge {
+	--backing-brush: var(--gauge-backing);
+	--backing-outline: var(--gauge-backing-outline);
+	--needle-brush: var(--gauge-needle);
+	--needle-outline: var(--gauge-needle-outline);
+	--tick-brush: transparent;
+	--minor-tick-brush: transparent;
+}
+
+igx-radial-gauge {
+	--font-brush: var(--gauge-font);
+	--scale-brush: var(--gauge-scale);
+	--scale-outline: var(--gauge-scale-outline);
+	--needle-pivot-brush: transparent;
+	--needle-pivot-outline: transparent;
+	--tick-brush: var(--gauge-scale);
+}
+
+.value-display {
+	margin: 0.2rem 0 0.25rem;
+	font-family: 'Roboto', sans-serif;
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 1.05;
+	color: var(--text-strong);
+}
+
+.value-display span {
+	font-family: 'Roboto', sans-serif;
+	font-size: 0.875rem;
+	font-weight: 400;
+	margin-left: 0.35rem;
+	color: var(--text-muted);
+}
+
+
+.bounds-text {
+	display: block;
+	margin-top: 0.25rem;
+	font-family: 'Roboto', sans-serif;
+	font-size: 0.875rem;
+	color: var(--text-soft);
+}
+
+.radial-panel {
+	align-self: stretch;
+}
+
+.radial-gauge-card {
+	display: grid;
+	justify-items: center;
+	text-align: center;
+	margin-bottom: 0;
+	padding-bottom: 1.25rem;
+}
+
+.radial-gauge-header {
+	justify-content: center;
+	width: 100%;
+}
+
+.radial-gauge-visual {
+	position: relative;
+	width: 100%;
+	max-width: 360px;
+	margin: 0 auto;
+	overflow: hidden;
+	height: 160px;
+}
+
+.radial-gauge-visual igx-radial-gauge {
+	display: block;
+	transform: translateY(-8px) scale(1.08);
+	transform-origin: top center;
+}
+
+.radial-value-display {
+	position: absolute;
+	top: 75%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0;
+	z-index: 1;
+	pointer-events: none;
+	text-align: center;
+	line-height: 0.95;
+}
+
+.radial-value-display span {
+	display: block;
+	margin: 0.2rem 0 0;
+	font-family: 'Roboto', sans-serif;
+	font-size: 0.875rem;
+	font-weight: 400;
+	color: var(--text-soft);
+}
+
+@media (max-width: 960px) {
+	.app-toolbar {
+		padding: 1.25rem 1rem 0;
+	}
+
+	.dashboard {
+		flex-direction: column;
+	}
+
+	.panel {
+		width: 100%;
+	}
+}
+
+@media (max-width: 640px) {
+	.app-toolbar {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.theme-switch {
+		justify-content: center;
+	}
+
+	.panel {
+		padding: 1rem;
+	}
+}

@@ -1,3 +1,13 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  { path: '', redirectTo: 'progress', pathMatch: 'full' },
+  {
+    path: 'progress',
+    loadComponent: () => import('../progress-gauge/app').then(m => m.App)
+  },
+  {
+    path: 'status',
+    loadComponent: () => import('../Status-gauge/status-gauge.component').then(m => m.StatusGaugeComponent)
+  }
+];

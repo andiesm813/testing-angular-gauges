@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Figma-MCP__get_design_context",
+      "mcp__Figma-MCP__get_screenshot",
+      "Bash(curl -s http://localhost:4200/main.js)",
+      "Bash(curl -s \"http://localhost:4200/main.js\")",
+      "Bash(node -e ' *)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --disable-gpu --no-sandbox --remote-debugging-port=9222 http://localhost:4200)",
+      "Bash(curl -s http://localhost:9222/json)",
+      "Bash(python3 -c \"import sys,json; tabs=json.load\\(sys.stdin\\); print\\(tabs[0]['url'] if tabs else 'no tabs'\\)\")",
+      "Bash(node --experimental-websocket -e ' *)",
+      "Bash(npx ng *)"
+    ]
+  }
+}

@@ -1,15 +1,10 @@
 import { Component } from '@angular/core';
-import { IgxLinearGaugeModule } from 'igniteui-angular-gauges';
-import { IgxRadialGaugeModule } from 'igniteui-angular-gauges';
-import { IgxBulletGraphModule } from 'igniteui-angular-gauges';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [IgxLinearGaugeModule, IgxRadialGaugeModule, IgxBulletGraphModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
-  linearValue = 65;
-  radialValue = 75;
-}
+export class App {}
