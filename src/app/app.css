@@ -24,7 +24,6 @@ h1 {
   margin-bottom: 2rem;
 }
 
-
 .radial-gauges-row {
   display: flex;
   flex-direction: row;
@@ -35,7 +34,6 @@ h1 {
 .radial-gauges-row .gauge-section {
   margin-bottom: 0;
 }
-
 
 .gauges-flex .gauge-section {
   margin-bottom: 0;
@@ -106,9 +104,10 @@ igx-bullet-graph {
     --minor-tick-brush: transparent;
     --range-brushes: #84c689, #fed663, #e86e6b;
     --range-outlines: #84c689, #fed663, #e86e6b;
-    --scale-background-brush: red;
-    --scale-background-outline: red;
+    --scale-background-brush: #e0e0e8;
+    --scale-background-outline: #e0e0e8;
     --target-value-brush: #2E2E30;
+    --target-value-outline: #2E2E30;
     --tick-brush: white;
     --value-brush: #2E2E30;
     --ig-theme: material;
