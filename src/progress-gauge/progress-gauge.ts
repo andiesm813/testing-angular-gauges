@@ -4,12 +4,12 @@ import { SENSORS, GaugeSensor } from '../shared/gauge-data';
 import { ThemeService } from '../shared/theme.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-progress-gauge',
   imports: [IgxLinearGaugeModule, IgxRadialGaugeModule, IgxBulletGraphModule],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  templateUrl: './progress-gauge.html',
+  styleUrl: './progress-gauge.css'
 })
-export class App {
+export class ProgressGaugeComponent {
   protected readonly themeService = inject(ThemeService);
   readonly bulletScaleStartExtent = 0.02;
   readonly bulletScaleEndExtent = 0.96;

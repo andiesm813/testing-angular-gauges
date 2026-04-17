@@ -4,7 +4,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'progress', pathMatch: 'full' },
   {
     path: 'progress',
-    loadComponent: () => import('../progress-gauge/app').then(m => m.App)
+    loadComponent: () => import('../progress-gauge/progress-gauge').then(m => m.ProgressGaugeComponent)
   },
   {
     path: 'status',
