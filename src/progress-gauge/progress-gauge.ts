@@ -1,5 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { IgxLinearGaugeModule, IgxRadialGaugeModule, IgxBulletGraphModule } from 'igniteui-angular-gauges';
+import {
+  IgxBulletGraphModule,
+  IgxFormatLinearGraphLabelEventArgs,
+  IgxFormatRadialGaugeLabelEventArgs,
+  IgxLinearGaugeModule,
+  IgxRadialGaugeModule
+} from 'igniteui-angular-gauges';
 import { SENSORS, GaugeSensor } from '../shared/gauge-data';
 import { ThemeService } from '../shared/theme.service';
 
@@ -63,6 +69,18 @@ export class ProgressGaugeComponent {
     }
 
     return this.withAlpha(resolvedColor, 0.45);
+  }
+
+  formatMinMaxLabel(
+    event: { sender: unknown; args: IgxFormatLinearGraphLabelEventArgs | IgxFormatRadialGaugeLabelEventArgs },
+    min: number,
+    max: number
+  ): void {
+    const value = event.args.value;
+    const epsilon = 0.0001;
+    const isMin = Math.abs(value - min) < epsilon;
+    const isMax = Math.abs(value - max) < epsilon;
+    event.args.label = isMin || isMax ? `${Math.round(value) === value ? value : value.toFixed(2)}` : '';
   }
 
   private withAlpha(hexColor: string, alpha: number): string {

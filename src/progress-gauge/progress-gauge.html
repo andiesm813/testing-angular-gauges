@@ -16,12 +16,13 @@
           [fontBrush]="gaugeFontBrush"
           [scaleBrush]="gaugeTrackBrush" [scaleOutline]="gaugeTrackBrush"
           [tickBrush]="gaugeTickBrush"
-          [tickStrokeThickness]="2" [scaleStartExtent]="0.02" [scaleEndExtent]="0.96"
+          [tickStrokeThickness]="0" [scaleStartExtent]="0.02" [scaleEndExtent]="0.96"
           [minorTickCount]="0"
           needleShape="Triangle"
           needleBrush="transparent" needleOutline="transparent"
-          [needleBreadth]="32" [needleInnerExtent]="0.38" [needleOuterExtent]="0.95"
-          [needleStrokeThickness]="0">
+          [needleBreadth]="24" [needleInnerExtent]="0.38" [needleOuterExtent]="0.95"
+          [needleStrokeThickness]="0"
+          (formatLabel)="formatMinMaxLabel($event, gauge.min, gauge.max)">
           <igx-linear-graph-range
             [startValue]="gauge.min" [endValue]="gauge.value"
             [brush]="activeRangeColor(gauge)" [outline]="activeRangeColor(gauge)"
@@ -44,12 +45,13 @@
             [fontBrush]="gaugeFontBrush"
             [scaleBrush]="gaugeTrackBrush" [scaleOutline]="gaugeTrackBrush"
             [tickBrush]="gaugeTickBrush"
-            [tickStrokeThickness]="2" [scaleStartExtent]="0.02" [scaleEndExtent]="0.96"
+            [tickStrokeThickness]="0" [scaleStartExtent]="0.02" [scaleEndExtent]="0.96"
             [minorTickCount]="0"
             needleShape="Triangle"
             needleBrush="transparent" needleOutline="transparent"
-            [needleBreadth]="32" [needleInnerExtent]="0.38" [needleOuterExtent]="0.95"
-            [needleStrokeThickness]="0">
+            [needleBreadth]="24" [needleInnerExtent]="0.38" [needleOuterExtent]="0.95"
+            [needleStrokeThickness]="0"
+            (formatLabel)="formatMinMaxLabel($event, gauge.min, gauge.max)">
             <igx-linear-graph-range
               [startValue]="gauge.min" [endValue]="gauge.value"
               [brush]="activeRangeColor(gauge)" [outline]="activeRangeColor(gauge)"
@@ -73,7 +75,7 @@
         [fontBrush]="gaugeFontBrush"
         [scaleBrush]="gaugeTrackBrush" [scaleOutline]="gaugeTrackBrush"
         [tickBrush]="gaugeTickBrush"
-        [tickStrokeThickness]="2" [scaleStartExtent]="0.02" [scaleEndExtent]="0.96"
+        [tickStrokeThickness]="0" [scaleStartExtent]="0.02" [scaleEndExtent]="0.96"
         [minorTickCount]="0"
         needleShape="Custom"
         needleBrush="#fff" needleOutline="#2E2E30"
@@ -81,7 +83,8 @@
         needleInnerExtent="0.18" needleOuterExtent="0.52"
         needleOuterPointExtent="0.35" needleInnerPointExtent="0.18"
         needleInnerPointWidth="0" needleOuterPointWidth="0.17"
-        needleInnerBaseWidth="0" needleOuterBaseWidth="0">
+        needleInnerBaseWidth="0" needleOuterBaseWidth="0"
+        (formatLabel)="formatMinMaxLabel($event, customNeedle.min, customNeedle.max)">
         <igx-linear-graph-range
           [startValue]="customNeedle.min" [endValue]="customNeedle.value"
           [brush]="activeRangeColor(customNeedle)" [outline]="activeRangeColor(customNeedle)"
@@ -102,14 +105,15 @@
             [scaleStartExtent]="0.58" [scaleEndExtent]="0.70" scaleOversweep="0"
             [labelInterval]="gauge.interval" [labelExtent]="0.84"
             font="14px Roboto, sans-serif" [fontBrush]="gaugeFontBrush"
-            [minorTickCount]="0" [tickStrokeThickness]="2"
+            [minorTickCount]="0" [tickStrokeThickness]="0"
             [tickBrush]="gaugeTickBrush"
             [tickStartExtent]="0.56" [tickEndExtent]="0.72"
             needleShape="Triangle" needlePivotShape="None"
             [needleBrush]="gaugeNeedleBrush" [needleOutline]="gaugeNeedleOut"
             [needleStartExtent]="0.45" [needleEndExtent]="0.62"
-            [needleStartWidthRatio]="0.25" [needleEndWidthRatio]="0.02"
+            [needleStartWidthRatio]="0.1875" [needleEndWidthRatio]="0.015"
             [needleStrokeThickness]="4"
+            (formatLabel)="formatMinMaxLabel($event, gauge.min, gauge.max)"
             [titleDisplaysValue]="true" titleTextStyle="bold 2rem Roboto, sans-serif"
             [titleExtent]="-0.1">
             <igx-radial-gauge-range
@@ -141,11 +145,12 @@
           [scaleStartExtent]="bulletScaleStartExtent" [scaleEndExtent]="bulletScaleEndExtent"
           [tickStrokeThickness]="0" [tickStartExtent]="1" [tickEndExtent]="0"
           [minorTickCount]="0"
-          font="14px Roboto, sans-serif" fontBrush="transparent"
+          font="14px Roboto, sans-serif" [fontBrush]="gaugeFontBrush"
           scaleBackgroundBrush="#e9e9ea" scaleBackgroundOutline="#e9e9ea"
           tickBrush="transparent"
           valueBrush="#2E2E30" valueOutline="#2E2E30"
-          targetValueBrush="transparent" targetValueOutline="transparent">
+          targetValueBrush="transparent" targetValueOutline="transparent"
+          (formatLabel)="formatMinMaxLabel($event, bulletSensor.min, bulletSensor.max)">
           @for (range of bulletSensor.ranges; track $index) {
             <igx-linear-graph-range
               [startValue]="range.start" [endValue]="range.end"

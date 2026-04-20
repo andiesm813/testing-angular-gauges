@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import {
+  IgxFormatLinearGraphLabelEventArgs,
+  IgxFormatRadialGaugeLabelEventArgs,
   IgxLinearGaugeModule,
   IgxRadialGaugeModule
 } from 'igniteui-angular-gauges';
@@ -75,10 +77,39 @@ export class StatusGaugeComponent {
     return this.isRangeActive(gauge, range) ? color : this.hexToRgba(color, isDark ? 0.4 : 0.3);
   }
 
-  protected rangeInnerExtent(_gauge: GaugeData, _range: GaugeRange): number { return 0.06; }
-  protected rangeOuterExtent(_gauge: GaugeData, _range: GaugeRange): number { return 0.64; }
-  protected radialInnerExtent(_gauge: GaugeData, _range: GaugeRange): number { return 0.567; }
-  protected radialOuterExtent(_gauge: GaugeData, _range: GaugeRange): number { return 0.733; }
+  protected rangeOutline(gauge: GaugeData, range: GaugeRange): string {
+    const isDark = this.themeService.darkMode();
+    const color = this.themeService.resolveColor(range.color);
+    return this.isRangeActive(gauge, range) ? color : this.hexToRgba(color, isDark ? 0.78 : 0.66);
+  }
+
+  protected rangeInnerExtent(gauge: GaugeData, range: GaugeRange): number {
+    return 0.06;
+  }
+
+  protected rangeOuterExtent(gauge: GaugeData, range: GaugeRange): number {
+    return this.isRangeActive(gauge, range) ? 0.64 : 0.495;
+  }
+
+  protected radialInnerExtent(gauge: GaugeData, range: GaugeRange): number {
+    return 0.567;
+  }
+
+  protected radialOuterExtent(gauge: GaugeData, range: GaugeRange): number {
+    return this.isRangeActive(gauge, range) ? 0.733 : 0.692;
+  }
+
+  protected formatMinMaxLabel(
+    event: { sender: unknown; args: IgxFormatLinearGraphLabelEventArgs | IgxFormatRadialGaugeLabelEventArgs },
+    min: number,
+    max: number
+  ): void {
+    const value = event.args.value;
+    const epsilon = 0.0001;
+    const isMin = Math.abs(value - min) < epsilon;
+    const isMax = Math.abs(value - max) < epsilon;
+    event.args.label = isMin || isMax ? `${Math.round(value) === value ? value : value.toFixed(2)}` : '';
+  }
 
   private withComputedBounds(gauge: Omit<GaugeData, 'min' | 'max'> & { min: number; max: number }): GaugeData {
     const rangeStarts = gauge.ranges.map(r => r.start);

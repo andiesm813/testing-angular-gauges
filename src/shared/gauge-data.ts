@@ -25,17 +25,17 @@ export interface GaugeSensor {
 export const SENSORS: GaugeSensor[] = [
   {
     id: 'engine-temp',
-    label: 'Engine Temperature',
-    chartLabel: 'Engine',
+    label: 'Coolant Temperature',
+    chartLabel: 'Coolant',
     unit: '°C',
     value: 64,
     min: 0,
     max: 100,
     interval: 20,
     ranges: [
-      { start: 0,  end: 45,  color: PALETTE.light.good },
+      { start: 0,  end: 45,  color: PALETTE.light.danger },
       { start: 45, end: 75,  color: PALETTE.light.warning },
-      { start: 75, end: 100, color: PALETTE.light.danger }
+      { start: 75, end: 100, color: PALETTE.light.good }
     ]
   },
   {
