@@ -27,6 +27,7 @@ interface GaugeData {
 })
 export class StatusGaugeComponent {
   protected readonly themeService = inject(ThemeService);
+  protected inactiveRangeOpacityEnabled = true;
 
   protected readonly gauges: GaugeData[] = SENSORS.map(sensor =>
     this.withComputedBounds({
@@ -74,13 +75,27 @@ export class StatusGaugeComponent {
   protected rangeBrush(gauge: GaugeData, range: GaugeRange): string {
     const isDark = this.themeService.darkMode();
     const color = this.themeService.resolveColor(range.color);
-    return this.isRangeActive(gauge, range) ? color : this.hexToRgba(color, isDark ? 0.4 : 0.3);
+    if (this.isRangeActive(gauge, range) || !this.inactiveRangeOpacityEnabled) {
+      return color;
+    }
+    return this.hexToRgba(color, isDark ? 0.4 : 0.3);
   }
 
   protected rangeOutline(gauge: GaugeData, range: GaugeRange): string {
     const isDark = this.themeService.darkMode();
     const color = this.themeService.resolveColor(range.color);
-    return this.isRangeActive(gauge, range) ? color : this.hexToRgba(color, isDark ? 0.78 : 0.66);
+    if (this.isRangeActive(gauge, range) || !this.inactiveRangeOpacityEnabled) {
+      return color;
+    }
+    return this.hexToRgba(color, isDark ? 0.78 : 0.66);
+  }
+
+  protected setInactiveRangeOpacity(enabled: boolean): void {
+    this.inactiveRangeOpacityEnabled = enabled;
+  }
+
+  protected rangeStrokeThickness(gauge: GaugeData, range: GaugeRange): number {
+    return this.isRangeActive(gauge, range) ? 1 : 1.35;
   }
 
   protected rangeInnerExtent(gauge: GaugeData, range: GaugeRange): number {

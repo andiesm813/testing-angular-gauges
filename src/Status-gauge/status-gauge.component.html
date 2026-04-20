@@ -4,6 +4,30 @@
       <p class="app-kicker">Sensor Monitor</p>
       <h1 class="app-title">Ignite UI Gauge States</h1>
     </div>
+
+    <section class="prefs-panel" aria-label="Gauge demo preferences">
+      <p class="prefs-title">Inactive Range Opacity</p>
+      <div class="prefs-options" role="radiogroup" aria-label="Inactive range opacity mode">
+        <label class="prefs-option">
+          <input
+            type="radio"
+            name="inactiveOpacityMode"
+            [checked]="inactiveRangeOpacityEnabled"
+            (change)="setInactiveRangeOpacity(true)"
+          />
+          Keep
+        </label>
+        <label class="prefs-option">
+          <input
+            type="radio"
+            name="inactiveOpacityMode"
+            [checked]="!inactiveRangeOpacityEnabled"
+            (change)="setInactiveRangeOpacity(false)"
+          />
+          Remove
+        </label>
+      </div>
+    </section>
   </header>
 
   <main class="dashboard">
@@ -57,7 +81,7 @@
                   [endValue]="range.end"
                   [brush]="rangeBrush(gauge, range)"
                   [outline]="rangeOutline(gauge, range)"
-                  [strokeThickness]="1"
+                  [strokeThickness]="rangeStrokeThickness(gauge, range)"
                   [innerStartExtent]="rangeInnerExtent(gauge, range)"
                   [innerEndExtent]="rangeInnerExtent(gauge, range)"
                   [outerStartExtent]="rangeOuterExtent(gauge, range)"
@@ -114,8 +138,8 @@
                 needlePivotShape="None"
                 [needleBrush]="gaugeNeedleBrush"
                 [needleOutline]="gaugeNeedleOutlineBrush"
-                [needleStartExtent]="0.64"
-                [needleEndExtent]="0.50"
+                [needleStartExtent]="0.60"
+                [needleEndExtent]="0.45"
                 [needleStartWidthRatio]="0.1875"
                 [needleEndWidthRatio]="0.015"
                [needleStrokeThickness]="3"
@@ -127,7 +151,7 @@
                     [endValue]="range.end"
                     [brush]="rangeBrush(gauge, range)"
                     [outline]="rangeOutline(gauge, range)"
-                    [strokeThickness]="1"
+                    [strokeThickness]="rangeStrokeThickness(gauge, range)"
                     [innerStartExtent]="radialInnerExtent(gauge, range)"
                     [innerEndExtent]="radialInnerExtent(gauge, range)"
                     [outerStartExtent]="radialOuterExtent(gauge, range)"
