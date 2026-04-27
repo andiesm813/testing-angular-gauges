@@ -114,6 +114,33 @@ export class StatusGaugeComponent {
     return this.isRangeActive(gauge, range) ? 0.733 : 0.692;
   }
 
+  protected displayRangeStart(gauge: GaugeData, range: GaugeRange): number {
+    if (range.start <= gauge.min) return range.start;
+    return range.start + this.linearSegmentGap(gauge) / 2;
+  }
+
+  protected displayRangeEnd(gauge: GaugeData, range: GaugeRange): number {
+    if (range.end >= gauge.max) return range.end;
+    return range.end - this.linearSegmentGap(gauge) / 2;
+  }
+
+  protected displayRadialRangeStart(gauge: GaugeData, range: GaugeRange): number {
+    if (range.start <= gauge.min) return range.start;
+    return range.start + this.radialSegmentGap(gauge) / 2;
+  }
+
+  protected displayRadialRangeEnd(gauge: GaugeData, range: GaugeRange): number {
+    if (range.end >= gauge.max) return range.end;
+    return range.end - this.radialSegmentGap(gauge) / 2;
+  }
+
+  private segmentGap(gauge: GaugeData): number {
+    return Math.max(gauge.max - gauge.min, 1) * 0.015;
+  }
+
+  private linearSegmentGap(gauge: GaugeData): number { return this.segmentGap(gauge) * 0.6; }
+  private radialSegmentGap(gauge: GaugeData): number  { return this.segmentGap(gauge); }
+
   protected formatMinMaxLabel(
     event: { sender: unknown; args: IgxFormatLinearGraphLabelEventArgs | IgxFormatRadialGaugeLabelEventArgs },
     min: number,

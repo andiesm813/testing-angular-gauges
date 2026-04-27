@@ -77,8 +77,8 @@
             >
               @for (range of gauge.ranges; track $index) {
                 <igx-linear-graph-range
-                  [startValue]="range.start"
-                  [endValue]="range.end"
+                  [startValue]="displayRangeStart(gauge, range)"
+                  [endValue]="displayRangeEnd(gauge, range)"
                   [brush]="rangeBrush(gauge, range)"
                   [outline]="rangeOutline(gauge, range)"
                   [strokeThickness]="rangeStrokeThickness(gauge, range)"
@@ -147,8 +147,8 @@
               >
                 @for (range of gauge.ranges; track $index) {
                   <igx-radial-gauge-range
-                    [startValue]="range.start"
-                    [endValue]="range.end"
+                    [startValue]="displayRadialRangeStart(gauge, range)"
+                    [endValue]="displayRadialRangeEnd(gauge, range)"
                     [brush]="rangeBrush(gauge, range)"
                     [outline]="rangeOutline(gauge, range)"
                     [strokeThickness]="rangeStrokeThickness(gauge, range)"
