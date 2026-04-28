@@ -82,12 +82,8 @@ export class StatusGaugeComponent {
   }
 
   protected rangeOutline(gauge: GaugeData, range: GaugeRange): string {
-    const isDark = this.themeService.darkMode();
-    const color = this.themeService.resolveColor(range.color);
-    if (this.isRangeActive(gauge, range) || !this.inactiveRangeOpacityEnabled) {
-      return color;
-    }
-    return this.hexToRgba(color, isDark ? 0.78 : 0.66);
+    // Remove outline (stroke) for all ranges
+    return 'transparent';
   }
 
   protected setInactiveRangeOpacity(enabled: boolean): void {
@@ -95,7 +91,8 @@ export class StatusGaugeComponent {
   }
 
   protected rangeStrokeThickness(gauge: GaugeData, range: GaugeRange): number {
-    return this.isRangeActive(gauge, range) ? 1 : 1.35;
+    // Make inactive and active ranges the same thickness
+    return 1;
   }
 
   protected rangeInnerExtent(gauge: GaugeData, range: GaugeRange): number {
@@ -103,7 +100,8 @@ export class StatusGaugeComponent {
   }
 
   protected rangeOuterExtent(gauge: GaugeData, range: GaugeRange): number {
-    return this.isRangeActive(gauge, range) ? 0.64 : 0.495;
+    // Make inactive and active ranges the same thickness visually for linear gauge
+    return 0.64;
   }
 
   protected radialInnerExtent(gauge: GaugeData, range: GaugeRange): number {
@@ -111,7 +109,8 @@ export class StatusGaugeComponent {
   }
 
   protected radialOuterExtent(gauge: GaugeData, range: GaugeRange): number {
-    return this.isRangeActive(gauge, range) ? 0.733 : 0.692;
+    // Make inactive and active ranges the same thickness visually
+    return 0.733;
   }
 
   protected displayRangeStart(gauge: GaugeData, range: GaugeRange): number {
