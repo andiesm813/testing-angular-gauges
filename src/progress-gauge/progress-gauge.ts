@@ -71,6 +71,17 @@ export class ProgressGaugeComponent {
     return this.withAlpha(resolvedColor, 0.45);
   }
 
+  progressRangeBrush(sensor: GaugeSensor, index: number): string {
+    const activeIndex = sensor.ranges.findIndex(r =>
+      sensor.value >= r.start && (sensor.value < r.end || r.end === sensor.max)
+    );
+    if (index <= activeIndex) {
+      const activeColor = sensor.ranges[activeIndex]?.color ?? sensor.ranges[sensor.ranges.length - 1].color;
+      return this.themeService.resolveColor(activeColor);
+    }
+    return this.gaugeTrackBrush;
+  }
+
   formatMinMaxLabel(
     event: { sender: unknown; args: IgxFormatLinearGraphLabelEventArgs | IgxFormatRadialGaugeLabelEventArgs },
     min: number,
@@ -81,6 +92,48 @@ export class ProgressGaugeComponent {
     const isMin = Math.abs(value - min) < epsilon;
     const isMax = Math.abs(value - max) < epsilon;
     event.args.label = isMin || isMax ? `${Math.round(value) === value ? value : value.toFixed(2)}` : '';
+  }
+
+  bulletRangeStart(sensor: GaugeSensor, range: { start: number; end: number }): number {
+    if (range.start <= sensor.min) return range.start;
+    return range.start + this.bulletSegmentGap(sensor) / 2;
+  }
+
+  bulletRangeEnd(sensor: GaugeSensor, range: { start: number; end: number }): number {
+    if (range.end >= sensor.max) return range.end;
+    return range.end - this.bulletSegmentGap(sensor) / 2;
+  }
+
+  linearRangeStart(sensor: GaugeSensor, range: { start: number; end: number }): number {
+    if (range.start <= sensor.min) return range.start;
+    return range.start + this.linearSegmentGap(sensor) / 2;
+  }
+
+  linearRangeEnd(sensor: GaugeSensor, range: { start: number; end: number }): number {
+    if (range.end >= sensor.max) return range.end;
+    return range.end - this.linearSegmentGap(sensor) / 2;
+  }
+
+  radialRangeStart(sensor: GaugeSensor, range: { start: number; end: number }): number {
+    if (range.start <= sensor.min) return range.start;
+    return range.start + this.radialSegmentGap(sensor) / 2;
+  }
+
+  radialRangeEnd(sensor: GaugeSensor, range: { start: number; end: number }): number {
+    if (range.end >= sensor.max) return range.end;
+    return range.end - this.radialSegmentGap(sensor) / 2;
+  }
+
+  private bulletSegmentGap(sensor: GaugeSensor): number {
+    return Math.max(sensor.max - sensor.min, 1) * 0.015 * 0.45;
+  }
+
+  private linearSegmentGap(sensor: GaugeSensor): number {
+    return Math.max(sensor.max - sensor.min, 1) * 0.015 * 0.45;
+  }
+
+  private radialSegmentGap(sensor: GaugeSensor): number {
+    return Math.max(sensor.max - sensor.min, 1) * 0.015 * 0.75;
   }
 
   private withAlpha(hexColor: string, alpha: number): string {

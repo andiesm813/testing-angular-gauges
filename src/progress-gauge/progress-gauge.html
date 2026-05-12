@@ -23,12 +23,14 @@
           [needleBreadth]="24" [needleInnerExtent]="0.38" [needleOuterExtent]="0.95"
           [needleStrokeThickness]="0"
           (formatLabel)="formatMinMaxLabel($event, gauge.min, gauge.max)">
-          <igx-linear-graph-range
-            [startValue]="gauge.min" [endValue]="gauge.value"
-            [brush]="activeRangeColor(gauge)" [outline]="activeRangeColor(gauge)"
-            [innerStartExtent]="0.06" [innerEndExtent]="0.06"
-            [outerStartExtent]="0.64" [outerEndExtent]="0.64">
-          </igx-linear-graph-range>
+          @for (range of gauge.ranges; track $index) {
+            <igx-linear-graph-range
+              [startValue]="linearRangeStart(gauge, range)" [endValue]="linearRangeEnd(gauge, range)"
+              [brush]="progressRangeBrush(gauge, $index)" [outline]="progressRangeBrush(gauge, $index)"
+              [innerStartExtent]="0.06" [innerEndExtent]="0.06"
+              [outerStartExtent]="0.64" [outerEndExtent]="0.64">
+            </igx-linear-graph-range>
+          }
         </igx-linear-gauge>
       </section>
     }
@@ -52,12 +54,14 @@
             [needleBreadth]="24" [needleInnerExtent]="0.38" [needleOuterExtent]="0.95"
             [needleStrokeThickness]="0"
             (formatLabel)="formatMinMaxLabel($event, gauge.min, gauge.max)">
-            <igx-linear-graph-range
-              [startValue]="gauge.min" [endValue]="gauge.value"
-              [brush]="activeRangeColor(gauge)" [outline]="activeRangeColor(gauge)"
-              [innerStartExtent]="0.06" [innerEndExtent]="0.06"
-              [outerStartExtent]="0.64" [outerEndExtent]="0.64">
-            </igx-linear-graph-range>
+            @for (range of gauge.ranges; track $index) {
+              <igx-linear-graph-range
+                [startValue]="linearRangeStart(gauge, range)" [endValue]="linearRangeEnd(gauge, range)"
+                [brush]="progressRangeBrush(gauge, $index)" [outline]="progressRangeBrush(gauge, $index)"
+                [innerStartExtent]="0.06" [innerEndExtent]="0.06"
+                [outerStartExtent]="0.64" [outerEndExtent]="0.64">
+              </igx-linear-graph-range>
+            }
           </igx-linear-gauge>
         </div>
       }
@@ -85,12 +89,14 @@
         needleInnerPointWidth="0" needleOuterPointWidth="0.17"
         needleInnerBaseWidth="0" needleOuterBaseWidth="0"
         (formatLabel)="formatMinMaxLabel($event, customNeedle.min, customNeedle.max)">
-        <igx-linear-graph-range
-          [startValue]="customNeedle.min" [endValue]="customNeedle.value"
-          [brush]="activeRangeColor(customNeedle)" [outline]="activeRangeColor(customNeedle)"
-          [innerStartExtent]="0.06" [innerEndExtent]="0.06"
-          [outerStartExtent]="0.64" [outerEndExtent]="0.64">
-        </igx-linear-graph-range>
+        @for (range of customNeedle.ranges; track $index) {
+          <igx-linear-graph-range
+            [startValue]="linearRangeStart(customNeedle, range)" [endValue]="linearRangeEnd(customNeedle, range)"
+            [brush]="progressRangeBrush(customNeedle, $index)" [outline]="progressRangeBrush(customNeedle, $index)"
+            [innerStartExtent]="0.06" [innerEndExtent]="0.06"
+            [outerStartExtent]="0.64" [outerEndExtent]="0.64">
+          </igx-linear-graph-range>
+        }
       </igx-linear-gauge>
     </section>
 
@@ -116,12 +122,14 @@
             (formatLabel)="formatMinMaxLabel($event, gauge.min, gauge.max)"
             [titleDisplaysValue]="true" titleTextStyle="bold 2rem Roboto, sans-serif"
             [titleExtent]="-0.1">
-            <igx-radial-gauge-range
-              [startValue]="gauge.min" [endValue]="gauge.value"
-              [brush]="activeRangeColor(gauge)" [outline]="activeRangeColor(gauge)"
-              [innerStartExtent]="0.58" [innerEndExtent]="0.58"
-              [outerStartExtent]="0.70" [outerEndExtent]="0.70">
-            </igx-radial-gauge-range>
+            @for (range of gauge.ranges; track $index) {
+              <igx-radial-gauge-range
+                [startValue]="radialRangeStart(gauge, range)" [endValue]="radialRangeEnd(gauge, range)"
+                [brush]="progressRangeBrush(gauge, $index)" [outline]="progressRangeBrush(gauge, $index)"
+                [innerStartExtent]="0.58" [innerEndExtent]="0.58"
+                [outerStartExtent]="0.70" [outerEndExtent]="0.70">
+              </igx-radial-gauge-range>
+            }
           </igx-radial-gauge>
         </section>
       }
@@ -153,7 +161,7 @@
           (formatLabel)="formatMinMaxLabel($event, bulletSensor.min, bulletSensor.max)">
           @for (range of bulletSensor.ranges; track $index) {
             <igx-linear-graph-range
-              [startValue]="range.start" [endValue]="range.end"
+              [startValue]="bulletRangeStart(bulletSensor, range)" [endValue]="bulletRangeEnd(bulletSensor, range)"
               [brush]="bulletRangeBrush(bulletSensor, $index)" [outline]="bulletRangeBrush(bulletSensor, $index)"
               [innerStartExtent]="0.2" [innerEndExtent]="0.2"
               [outerStartExtent]="0.95" [outerEndExtent]="0.95">

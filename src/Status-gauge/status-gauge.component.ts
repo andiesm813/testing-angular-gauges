@@ -19,6 +19,9 @@ interface GaugeData {
   interval: number;
 }
 
+
+type InactiveRangeMode = 'keep' | 'remove' | 'gray';
+
 @Component({
   selector: 'status-gauge-root',
   imports: [IgxLinearGaugeModule, IgxRadialGaugeModule],
@@ -27,7 +30,7 @@ interface GaugeData {
 })
 export class StatusGaugeComponent {
   protected readonly themeService = inject(ThemeService);
-  protected inactiveRangeOpacityEnabled = true;
+  protected inactiveMode: InactiveRangeMode = 'keep';
 
   protected readonly gauges: GaugeData[] = SENSORS.map(sensor =>
     this.withComputedBounds({
@@ -75,23 +78,24 @@ export class StatusGaugeComponent {
   protected rangeBrush(gauge: GaugeData, range: GaugeRange): string {
     const isDark = this.themeService.darkMode();
     const color = this.themeService.resolveColor(range.color);
-    if (this.isRangeActive(gauge, range) || !this.inactiveRangeOpacityEnabled) {
+    if (this.isRangeActive(gauge, range) || this.inactiveMode === 'remove') {
       return color;
+    }
+    if (this.inactiveMode === 'gray') {
+      return isDark ? '#808096' : '#c4c4d6';
     }
     return this.hexToRgba(color, isDark ? 0.4 : 0.3);
   }
 
   protected rangeOutline(gauge: GaugeData, range: GaugeRange): string {
-    // Remove outline (stroke) for all ranges
     return 'transparent';
   }
 
-  protected setInactiveRangeOpacity(enabled: boolean): void {
-    this.inactiveRangeOpacityEnabled = enabled;
+  protected setInactiveMode(mode: InactiveRangeMode): void {
+    this.inactiveMode = mode;
   }
 
   protected rangeStrokeThickness(gauge: GaugeData, range: GaugeRange): number {
-    // Make inactive and active ranges the same thickness
     return 1;
   }
 
@@ -137,8 +141,8 @@ export class StatusGaugeComponent {
     return Math.max(gauge.max - gauge.min, 1) * 0.015;
   }
 
-  private linearSegmentGap(gauge: GaugeData): number { return this.segmentGap(gauge) * 0.6; }
-  private radialSegmentGap(gauge: GaugeData): number  { return this.segmentGap(gauge); }
+  private linearSegmentGap(gauge: GaugeData): number { return this.segmentGap(gauge) * 0.45; }
+  private radialSegmentGap(gauge: GaugeData): number  { return this.segmentGap(gauge) * 0.75; }
 
   protected formatMinMaxLabel(
     event: { sender: unknown; args: IgxFormatLinearGraphLabelEventArgs | IgxFormatRadialGaugeLabelEventArgs },

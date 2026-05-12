@@ -12,8 +12,8 @@
           <input
             type="radio"
             name="inactiveOpacityMode"
-            [checked]="inactiveRangeOpacityEnabled"
-            (change)="setInactiveRangeOpacity(true)"
+            [checked]="inactiveMode === 'keep'"
+            (change)="setInactiveMode('keep')"
           />
           Keep
         </label>
@@ -21,10 +21,19 @@
           <input
             type="radio"
             name="inactiveOpacityMode"
-            [checked]="!inactiveRangeOpacityEnabled"
-            (change)="setInactiveRangeOpacity(false)"
+            [checked]="inactiveMode === 'remove'"
+            (change)="setInactiveMode('remove')"
           />
           Remove
+        </label>
+        <label class="prefs-option">
+          <input
+            type="radio"
+            name="inactiveOpacityMode"
+            [checked]="inactiveMode === 'gray'"
+            (change)="setInactiveMode('gray')"
+          />
+          Inactive Gray
         </label>
       </div>
     </section>
