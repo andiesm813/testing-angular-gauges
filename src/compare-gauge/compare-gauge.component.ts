@@ -7,6 +7,7 @@ import {
 } from 'igniteui-angular-gauges';
 import { SENSORS, GaugeRange } from '../shared/gauge-data';
 import { ThemeService } from '../shared/theme.service';
+import { CompareStateService } from './compare-state.service';
 
 interface GaugeData {
   id: string;
@@ -19,18 +20,21 @@ interface GaugeData {
   interval: number;
 }
 
-
-type InactiveRangeMode = 'keep' | 'remove' | 'gray';
+interface DisplayRange {
+  start: number;
+  end: number;
+  brush: string;
+}
 
 @Component({
-  selector: 'status-gauge-root',
+  selector: 'app-compare-gauge',
   imports: [IgxLinearGaugeModule, IgxRadialGaugeModule],
-  templateUrl: './status-gauge.component.html',
-  styleUrl: './status-gauge.component.css'
+  templateUrl: './compare-gauge.component.html',
+  styleUrl: './compare-gauge.component.css'
 })
-export class StatusGaugeComponent {
+export class CompareGaugeComponent {
   protected readonly themeService = inject(ThemeService);
-  protected inactiveMode: InactiveRangeMode = 'keep';
+  protected readonly state = inject(CompareStateService);
 
   protected readonly gauges: GaugeData[] = SENSORS.map(sensor =>
     this.withComputedBounds({
@@ -69,52 +73,78 @@ export class StatusGaugeComponent {
     return this.themeService.darkMode() ? '#2a3442' : '#ffffff';
   }
 
+  private get gaugeTrackGray(): string {
+    return this.themeService.darkMode() ? '#404058' : '#e0e0e8';
+  }
+
+  protected get gaugeProgressScaleBrush(): string {
+    return this.state.gaugeStyle() === 'progress' ? this.gaugeTrackGray : 'transparent';
+  }
+
   protected isRangeActive(gauge: GaugeData, range: GaugeRange): boolean {
     const withinRange = gauge.value >= range.start && gauge.value < range.end;
     const onMaxBoundary = gauge.value === gauge.max && range.end === gauge.max;
     return withinRange || onMaxBoundary;
   }
 
-  protected rangeBrush(gauge: GaugeData, range: GaugeRange): string {
-    const isDark = this.themeService.darkMode();
+  protected statusRangeBrush(gauge: GaugeData, range: GaugeRange): string {
     const color = this.themeService.resolveColor(range.color);
-    if (this.isRangeActive(gauge, range) || this.inactiveMode === 'remove') {
+    if (this.isRangeActive(gauge, range)) {
       return color;
     }
-    if (this.inactiveMode === 'gray') {
-      return isDark ? '#808096' : '#c4c4d6';
+    return this.hexToMuted(color, this.themeService.darkMode());
+  }
+
+  protected getLinearProgressRanges(gauge: GaugeData): DisplayRange[] {
+    return this.buildProgressRanges(gauge, false);
+  }
+
+  protected getRadialProgressRanges(gauge: GaugeData): DisplayRange[] {
+    return this.buildProgressRanges(gauge, true);
+  }
+
+  private buildProgressRanges(gauge: GaugeData, radial: boolean): DisplayRange[] {
+    const activeIndex = gauge.ranges.findIndex(r => this.isRangeActive(gauge, r));
+    const activeColor = activeIndex >= 0
+      ? this.themeService.resolveColor(gauge.ranges[activeIndex].color)
+      : this.gaugeTrackGray;
+    const gray = this.gaugeTrackGray;
+
+    const gapStart = (r: GaugeRange) => {
+      if (r.start <= gauge.min) return r.start;
+      return r.start + (radial ? this.radialSegmentGap(gauge) : this.linearSegmentGap(gauge)) / 2;
+    };
+    const gapEnd = (r: GaugeRange) => {
+      if (r.end >= gauge.max) return r.end;
+      return r.end - (radial ? this.radialSegmentGap(gauge) : this.linearSegmentGap(gauge)) / 2;
+    };
+
+    const result: DisplayRange[] = [];
+    for (let i = 0; i < gauge.ranges.length; i++) {
+      const range = gauge.ranges[i];
+      const segStart = gapStart(range);
+      const segEnd = gapEnd(range);
+
+      // Explicitly fill the gap between the previous range and this one
+      if (i > 0 && range.start > gauge.min) {
+        const prevSegEnd = gapEnd(gauge.ranges[i - 1]);
+        result.push({ start: prevSegEnd, end: segStart, brush: gray });
+      }
+
+      if (i < activeIndex) {
+        result.push({ start: segStart, end: segEnd, brush: activeColor });
+      } else if (i === activeIndex) {
+        if (gauge.value > segStart) {
+          result.push({ start: segStart, end: gauge.value, brush: activeColor });
+        }
+        if (gauge.value < segEnd) {
+          result.push({ start: gauge.value, end: segEnd, brush: gray });
+        }
+      } else {
+        result.push({ start: segStart, end: segEnd, brush: gray });
+      }
     }
-    return this.hexToMuted(color, isDark);
-  }
-
-  protected rangeOutline(gauge: GaugeData, range: GaugeRange): string {
-    return 'transparent';
-  }
-
-  protected setInactiveMode(mode: InactiveRangeMode): void {
-    this.inactiveMode = mode;
-  }
-
-  protected rangeStrokeThickness(gauge: GaugeData, range: GaugeRange): number {
-    return 1;
-  }
-
-  protected rangeInnerExtent(gauge: GaugeData, range: GaugeRange): number {
-    return 0.06;
-  }
-
-  protected rangeOuterExtent(gauge: GaugeData, range: GaugeRange): number {
-    // Make inactive and active ranges the same thickness visually for linear gauge
-    return 0.64;
-  }
-
-  protected radialInnerExtent(gauge: GaugeData, range: GaugeRange): number {
-    return 0.567;
-  }
-
-  protected radialOuterExtent(gauge: GaugeData, range: GaugeRange): number {
-    // Make inactive and active ranges the same thickness visually
-    return 0.733;
+    return result;
   }
 
   protected displayRangeStart(gauge: GaugeData, range: GaugeRange): number {

@@ -125,11 +125,11 @@ export class ProgressGaugeComponent {
   }
 
   private bulletSegmentGap(sensor: GaugeSensor): number {
-    return Math.max(sensor.max - sensor.min, 1) * 0.015 * 0.45;
+    return Math.max(sensor.max - sensor.min, 1) * 0.015 * 0.22;
   }
 
   private linearSegmentGap(sensor: GaugeSensor): number {
-    return Math.max(sensor.max - sensor.min, 1) * 0.015 * 0.45;
+    return Math.max(sensor.max - sensor.min, 1) * 0.015 * 0.22;
   }
 
   private radialSegmentGap(sensor: GaugeSensor): number {
