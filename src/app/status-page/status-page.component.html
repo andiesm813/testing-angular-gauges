@@ -4,42 +4,10 @@
 
  <div class="gauges-container">
 
-
-    <section class="gauge-section linear-gauge-section">
-      <div class="header">
-        <p class="lg-title">Current Temperature</p>
-        <p class="lg-value">64</p>
-      </div>
-
-        <igx-linear-gauge width="100%" height="54px" [minimumValue]="0" [maximumValue]="100" [value]="64"
-          [interval]="100" [labelExtent]="0" font="12px Roboto, sans-serif" 
-          [scaleStartExtent]="0.02" [scaleEndExtent]="0.96" scaleBrush="transparent" scaleOutline="transparent"
-          tickStartExtent="0.9" tickEndExtent="0" tickStrokeThickness="0" 
-          
-          needleShape="Custom" needleBrush="#2E2E30" needleOutline="#fff" needleStrokeThickness="2"
-          needleBreadth="48" needleInnerExtent="0.65" needleInnerPointExtent="0.65"
-          needleOuterExtent="1.8" needleOuterPointExtent="1.8" 
-          needleInnerPointWidth="0" needleOuterPointWidth="0.8"
-          needleInnerBaseWidth="0" needleOuterBaseWidth="0">
-
-           <igx-linear-graph-range [startValue]="0" [endValue]="30" brush="#f9cdcc" outline="white" strokeThickness="4"
-            [innerStartExtent]="0.2" [innerEndExtent]="0.2" [outerStartExtent]="0.75" [outerEndExtent]="0.75">
-          </igx-linear-graph-range>
-          <igx-linear-graph-range [startValue]="30" [endValue]="70" brush="#FEB600" outline="white" strokeThickness="4"
-            [innerStartExtent]="0.2" [innerEndExtent]="0.2" [outerStartExtent]="0.9" [outerEndExtent]="0.9">
-          </igx-linear-graph-range>
-          <igx-linear-graph-range [startValue]="70" [endValue]="100" brush="#d2ebd4" outline="white" strokeThickness="4"
-            [innerStartExtent]="0.2" [innerEndExtent]="0.2" [outerStartExtent]="0.75" [outerEndExtent]="0.75">
-          </igx-linear-graph-range>
-         
-        </igx-linear-gauge>
-
-    </section>
-
     <section class="gauge-section linear-gauge-section">
       <div class="header">
         <p class="lg-title">Oil Pressure</p>
-        <p class="lg-value">88</p>
+        <span class="tempUnitContainer"><p class="lg-value">88</p><p class="unit-value">psi</p></span>
       </div>
 
         <igx-linear-gauge width="100%" height="54px" [minimumValue]="0" [maximumValue]="100" [value]="88"
@@ -67,14 +35,46 @@
 
     </section>
 
+    <section class="gauge-section linear-gauge-section">
+      <div class="header">
+        <p class="lg-title">Current Temperature</p>
+        <span class="tempUnitContainer"><p class="lg-value">64</p><p class="unit-value">°C</p></span>
+      </div>
+
+        <igx-linear-gauge width="100%" height="54px" [minimumValue]="0" [maximumValue]="100" [value]="64"
+          [interval]="100" [labelExtent]="0" font="12px Roboto, sans-serif" 
+          [scaleStartExtent]="0.02" [scaleEndExtent]="0.96" scaleBrush="transparent" scaleOutline="transparent"
+          tickStartExtent="0.9" tickEndExtent="0" tickStrokeThickness="0" 
+          
+          needleShape="Custom" needleBrush="#2E2E30" needleOutline="#fff" needleStrokeThickness="2"
+          needleBreadth="48" needleInnerExtent="0.65" needleInnerPointExtent="0.65"
+          needleOuterExtent="1.8" needleOuterPointExtent="1.8" 
+          needleInnerPointWidth="0" needleOuterPointWidth="0.8"
+          needleInnerBaseWidth="0" needleOuterBaseWidth="0">
+
+           <igx-linear-graph-range [startValue]="0" [endValue]="30" brush="#f9cdcc" outline="white" strokeThickness="4"
+            [innerStartExtent]="0.2" [innerEndExtent]="0.2" [outerStartExtent]="0.75" [outerEndExtent]="0.75">
+          </igx-linear-graph-range>
+          <igx-linear-graph-range [startValue]="30" [endValue]="70" brush="#FEB600" outline="white" strokeThickness="4"
+            [innerStartExtent]="0.2" [innerEndExtent]="0.2" [outerStartExtent]="0.9" [outerEndExtent]="0.9">
+          </igx-linear-graph-range>
+          <igx-linear-graph-range [startValue]="70" [endValue]="100" brush="#d2ebd4" outline="white" strokeThickness="4"
+            [innerStartExtent]="0.2" [innerEndExtent]="0.2" [outerStartExtent]="0.75" [outerEndExtent]="0.75">
+          </igx-linear-graph-range>
+         
+        </igx-linear-gauge>
+
+    </section>
+
+
         <section class="gauge-section linear-gauge-section">
       <div class="header">
         <p class="lg-title">Battery Health</p>
-        <p class="lg-value">28</p>
+        <span class="tempUnitContainer"><p class="lg-value">28</p><p class="unit-value">%</p></span>
       </div>
 
         <igx-linear-gauge width="100%" height="54px" [minimumValue]="0" [maximumValue]="100" [value]="28"
-          [interval]="100" [labelExtent]="0" font="12px Roboto, sans-serif" 
+          [interval]="100" [labelExtent]="0" font="12px Roboto, sans-serif" fontBrush="#2E2E30"
           [scaleStartExtent]="0.02" [scaleEndExtent]="0.96" scaleBrush="transparent" scaleOutline="transparent"
           tickStartExtent="0.9" tickEndExtent="0" tickStrokeThickness="0" 
           
@@ -99,84 +99,86 @@
     </section>
 
 
-  <div class="gauges-container">
-    <div id="gauges-chart">
-      <div class="chart-row">
-        <span class="chart-y-label">2016</span>
-        <igx-linear-gauge width="100%" height="40px" [minimumValue]="30" [maximumValue]="60" [value]="55"
-          [interval]="10" [labelExtent]="0" font="14px Roboto, sans-serif" fontBrush="transparent"
-          tickStrokeThickness="0" [scaleStartExtent]="0.02" [scaleEndExtent]="0.96"
-          needleShape="Custom" needleBrush="#2E2E30" needleOutline="#fff" needleStrokeThickness="2"
-          needleBreadth="48" needleInnerExtent="0.4" needleOuterExtent="2.2"
-          needleOuterPointExtent="2.2" needleInnerPointExtent="0.4"
-          needleInnerPointWidth="0" needleOuterPointWidth="1"
-          needleInnerBaseWidth="0" needleOuterBaseWidth="0">
-          <igx-linear-graph-range [startValue]="30" [endValue]="40" brush="#fae1e1" outline="#e86e6b"
-            [innerStartExtent]="0.06" [innerEndExtent]="0.06" [outerStartExtent]="0.95" [outerEndExtent]="0.95">
-          </igx-linear-graph-range>
-          <igx-linear-graph-range [startValue]="40" [endValue]="50" brush="#fff7de" outline="#fed663"
-            [innerStartExtent]="0.06" [innerEndExtent]="0.06" [outerStartExtent]="0.95" [outerEndExtent]="0.95">
-          </igx-linear-graph-range>
-          <igx-linear-graph-range [startValue]="50" [endValue]="60" brush="#84c689" outline="#84c689"
-            [innerStartExtent]="0.06" [innerEndExtent]="0.06" [outerStartExtent]="0.95" [outerEndExtent]="0.95">
-          </igx-linear-graph-range>
-        </igx-linear-gauge>
-      </div>
-      <div class="chart-row">
-        <span class="chart-y-label">2017</span>
-        <igx-linear-gauge width="100%" height="40px" [minimumValue]="30" [maximumValue]="60" [value]="45"
-          [interval]="10" [labelExtent]="0" font="14px Roboto, sans-serif" fontBrush="transparent"
-          tickStrokeThickness="0" [scaleStartExtent]="0.02" [scaleEndExtent]="0.96"
-          needleShape="Custom" needleBrush="#2E2E30" needleOutline="#fff" needleStrokeThickness="2"
-          needleBreadth="48" needleInnerExtent="0.4" needleOuterExtent="2.2"
-          needleOuterPointExtent="2.2" needleInnerPointExtent="0.4"
-          needleInnerPointWidth="0" needleOuterPointWidth="1"
-          needleInnerBaseWidth="0" needleOuterBaseWidth="0">
-          <igx-linear-graph-range [startValue]="30" [endValue]="40" brush="#fae1e1" outline="#e86e6b"
-            [innerStartExtent]="0.06" [innerEndExtent]="0.06" [outerStartExtent]="0.95" [outerEndExtent]="0.95">
-          </igx-linear-graph-range>
-          <igx-linear-graph-range [startValue]="40" [endValue]="50" brush="#fed663" outline="#fed663"
-            [innerStartExtent]="0.06" [innerEndExtent]="0.06" [outerStartExtent]="0.95" [outerEndExtent]="0.95">
-          </igx-linear-graph-range>
-          <igx-linear-graph-range [startValue]="50" [endValue]="60" brush="#e6f4e7" outline="#84c689"
-            [innerStartExtent]="0.06" [innerEndExtent]="0.06" [outerStartExtent]="0.95" [outerEndExtent]="0.95">
-          </igx-linear-graph-range>
-        </igx-linear-gauge>
-      </div>
-      <div class="chart-row">
-        <span class="chart-y-label">2018</span>
-        <igx-linear-gauge width="100%" height="40px" [minimumValue]="30" [maximumValue]="60" [value]="35"
-          [interval]="10" [labelExtent]="0" font="14px Roboto, sans-serif" fontBrush="transparent"
-          tickStrokeThickness="0" [scaleStartExtent]="0.02" [scaleEndExtent]="0.96"
-          needleShape="Custom" needleBrush="#2E2E30" needleOutline="#fff" needleStrokeThickness="2"
-          needleBreadth="48" needleInnerExtent="0.4" needleOuterExtent="2.2"
-          needleOuterPointExtent="2.2" needleInnerPointExtent="0.4"
-          needleInnerPointWidth="0" needleOuterPointWidth="1"
-          needleInnerBaseWidth="0" needleOuterBaseWidth="0">
-          <igx-linear-graph-range [startValue]="30" [endValue]="40" brush="#e5706d" outline="#e86e6b"
-            [innerStartExtent]="0.06" [innerEndExtent]="0.06" [outerStartExtent]="0.95" [outerEndExtent]="0.95">
-          </igx-linear-graph-range>
-          <igx-linear-graph-range [startValue]="40" [endValue]="50" brush="#fff7de" outline="#fed663"
-            [innerStartExtent]="0.06" [innerEndExtent]="0.06" [outerStartExtent]="0.95" [outerEndExtent]="0.95">
-          </igx-linear-graph-range>
-          <igx-linear-graph-range [startValue]="50" [endValue]="60" brush="#e6f4e7" outline="#84c689"
-            [innerStartExtent]="0.06" [innerEndExtent]="0.06" [outerStartExtent]="0.95" [outerEndExtent]="0.95">
-          </igx-linear-graph-range>
-        </igx-linear-gauge>
-      </div>
-      <div class="chart-row">
-        <span class="chart-y-label"></span>
-        <div class="chart-x-labels">
-          <span class="chart-x-tick" style="left: 2%">30</span>
-          <span class="chart-x-tick" style="left: 35.3%">40</span>
-          <span class="chart-x-tick" style="left: 64.7%">50</span>
-          <span class="chart-x-tick" style="left: 96%">60</span>
-        </div>
-      </div>
+
+    <div class="radial-gauges-row">
+      <section class="gauge-section radial-gauge-section">
+        <igx-radial-gauge width="280px" height="280px" [minimumValue]="0" [maximumValue]="100" [value]="88"
+          [scaleStartAngle]="180" [scaleEndAngle]="0" [scaleStartExtent]="0.48" [scaleEndExtent]="0.66" 
+          scaleBrush="transparent" scaleOutline="transparent"
+          scaleOversweep="0" [labelInterval]="100" [labelExtent]="0.8" font="14px Roboto, sans-serif" fontBrush="#2E2E30"
+          [tickStrokeThickness]="0"
+          
+          needleShape="Triangle" needleBrush="#2E2E30" needleOutline="#fff" needleStrokeThickness="2" needlePivotShape="None" [needleStartExtent]="0.47"
+          [needleEndExtent]="0.58" [needleStartWidthRatio]="0.13" [needleEndWidthRatio]="0.06"
+titleColor="#2E2E30"
+          [titleDisplaysValue]="true" titleTextStyle="bold 2rem Roboto, sans-serif" [titleExtent]="-0.2" titleBrush="#2E2E30" 
+          subtitleText="psi" subtitleTextStyle="bold 0.8rem Roboto, sans-serif" [subtitleExtent]="-0.05" subtitleBrush="#2E2E30">
+
+          <igx-radial-gauge-range [startValue]="0" [endValue]="30" brush="#f9cdcc" outline="white" strokeThickness="4"
+          [innerStartExtent]="0.51" [innerEndExtent]="0.51" [outerStartExtent]="0.66" [outerEndExtent]="0.66">
+          </igx-radial-gauge-range>
+          <igx-radial-gauge-range [startValue]="30" [endValue]="70" brush="#ffe9b2" outline="white" strokeThickness="4"
+          [innerStartExtent]="0.51" [innerEndExtent]="0.51" [outerStartExtent]="0.66" [outerEndExtent]="0.66">
+          </igx-radial-gauge-range>
+          <igx-radial-gauge-range [startValue]="70" [endValue]="100" brush="#66BB6A" outline="white" strokeThickness="4"
+          [innerStartExtent]="0.51" [innerEndExtent]="0.51" [outerStartExtent]="0.70" [outerEndExtent]="0.70">
+          </igx-radial-gauge-range>
+        </igx-radial-gauge>
+      </section>
+
+      <section class="gauge-section radial-gauge-section">
+        <igx-radial-gauge width="280px" height="280px" [minimumValue]="0" [maximumValue]="100" [value]="64"
+          [scaleStartAngle]="180" [scaleEndAngle]="0" [scaleStartExtent]="0.48" [scaleEndExtent]="0.66" 
+          scaleBrush="transparent" scaleOutline="transparent"
+          scaleOversweep="0" [labelInterval]="100" [labelExtent]="0.8" font="14px Roboto, sans-serif" fontBrush="#2E2E30"
+          [tickStrokeThickness]="0"
+          
+          needleShape="Triangle" needleBrush="#2E2E30" needleOutline="#fff" needleStrokeThickness="2" needlePivotShape="None" [needleStartExtent]="0.47"
+          [needleEndExtent]="0.58" [needleStartWidthRatio]="0.13" [needleEndWidthRatio]="0.06"
+
+          [titleDisplaysValue]="true" titleTextStyle="bold 2rem Roboto, sans-serif" [titleExtent]="-0.2" titleBrush="#2E2E30" 
+          subtitleText="ºC" subtitleTextStyle="bold 0.8rem Roboto, sans-serif" [subtitleExtent]="-0.05" subtitleBrush="#2E2E30">
+
+          <igx-radial-gauge-range [startValue]="0" [endValue]="30" brush="#f9cdcc" outline="white" strokeThickness="4"
+          [innerStartExtent]="0.51" [innerEndExtent]="0.51" [outerStartExtent]="0.66" [outerEndExtent]="0.66">
+          </igx-radial-gauge-range>
+          <igx-radial-gauge-range [startValue]="30" [endValue]="70" brush="#FEB600" outline="white" strokeThickness="4"
+          [innerStartExtent]="0.51" [innerEndExtent]="0.51" [outerStartExtent]="0.70" [outerEndExtent]="0.70">
+          </igx-radial-gauge-range>
+          <igx-radial-gauge-range [startValue]="70" [endValue]="100" brush="#d2ebd4" outline="white" strokeThickness="4"
+          [innerStartExtent]="0.51" [innerEndExtent]="0.51" [outerStartExtent]="0.66" [outerEndExtent]="0.66">
+          </igx-radial-gauge-range>
+        </igx-radial-gauge>
+      </section>
+
+      <section class="gauge-section radial-gauge-section">
+        <igx-radial-gauge width="280px" height="280px" [minimumValue]="0" [maximumValue]="100" [value]="28"
+          [scaleStartAngle]="180" [scaleEndAngle]="0" [scaleStartExtent]="0.48" [scaleEndExtent]="0.66" 
+          scaleBrush="transparent" scaleOutline="transparent"
+          scaleOversweep="0" [labelInterval]="100" [labelExtent]="0.8" font="14px Roboto, sans-serif" fontBrush="#2E2E30"
+          [tickStrokeThickness]="0"
+          
+          needleShape="Triangle" needleBrush="#2E2E30" needleOutline="#fff" needleStrokeThickness="2" needlePivotShape="None" [needleStartExtent]="0.47"
+          [needleEndExtent]="0.58" [needleStartWidthRatio]="0.13" [needleEndWidthRatio]="0.06"
+
+          [titleDisplaysValue]="true" titleTextStyle="bold 2rem Roboto, sans-serif" [titleExtent]="-0.2" titleBrush="#2E2E30" 
+          subtitleText="%" subtitleTextStyle="bold 0.8rem Roboto, sans-serif" [subtitleExtent]="-0.05" subtitleBrush="#2E2E30">
+
+          <igx-radial-gauge-range [startValue]="0" [endValue]="30" brush="#EF5451" outline="white" strokeThickness="4"
+          [innerStartExtent]="0.51" [innerEndExtent]="0.51" [outerStartExtent]="0.70" [outerEndExtent]="0.70">
+          </igx-radial-gauge-range>
+          <igx-radial-gauge-range [startValue]="30" [endValue]="70" brush="#ffe9b2" outline="white" strokeThickness="4"
+          [innerStartExtent]="0.51" [innerEndExtent]="0.51" [outerStartExtent]="0.66" [outerEndExtent]="0.66">
+          </igx-radial-gauge-range>
+          <igx-radial-gauge-range [startValue]="70" [endValue]="100" brush="#d2ebd4" outline="white" strokeThickness="4"
+          [innerStartExtent]="0.51" [innerEndExtent]="0.51" [outerStartExtent]="0.66" [outerEndExtent]="0.66">
+
+          </igx-radial-gauge-range>
+        </igx-radial-gauge>
+      </section>
+
+
     </div>
-
-
-
 
   </div>
 </div>

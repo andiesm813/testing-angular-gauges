@@ -46,7 +46,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .gauges-page {
-  max-width: 800px;
+  max-width: 960px;
   margin: 2rem auto;
   padding: 0 1rem;
   font-family: 'Roboto', sans-serif;
@@ -102,10 +102,6 @@ igx-radial-gauge {
   max-width: 700px;
 }
 
-.linear-gauge-section {
-  max-width: 700px;
-}
-
 .header {
   display: flex;
   flex-direction: column;
@@ -128,6 +124,21 @@ igx-radial-gauge {
 
 .lg-value {
   font-size: 2rem;
+  font-weight: 700;
+  color: #2E2E30;
+  margin: 0;
+  line-height: 2.5rem;
+}
+
+.tempUnitContainer{
+  flex-direction: row;
+  display: flex;
+  gap: 0.25rem;
+  align-items: baseline;
+}
+
+.unit-value {
+  font-size: 0.8rem;
   font-weight: 700;
   color: #2E2E30;
   margin: 0;
