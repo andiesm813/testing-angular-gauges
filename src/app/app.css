@@ -98,14 +98,16 @@ igx-radial-gauge {
   display: block;
 }
 
-.bullet-graph-section {
-  max-width: 700px;
-}
-
 .header {
   display: flex;
   flex-direction: column;
   padding: 0 0 0 1rem;
+}
+
+.bulletgraph-header {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 0.5rem 1rem;
 }
 
 .issues-header {
@@ -143,6 +145,13 @@ igx-radial-gauge {
   color: #2E2E30;
   margin: 0;
   line-height: 2.5rem;
+}
+
+.unit-text-secondary {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #5C5D60;
+  margin: 0;
 }
 
 igx-linear-gauge {
@@ -198,8 +207,7 @@ igx-radial-gauge {
 #gauges-chart {
   display: flex;
   flex-direction: column;
-  gap: 0;
-  max-width: 700px;
+  gap: 0;;
 }
 
 .chart-row {
@@ -229,4 +237,35 @@ igx-radial-gauge {
   font-size: 14px;
   font-family: 'Roboto', sans-serif;
   color: #5C5D60;
+}
+
+#bullet-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;;
+}
+
+.bulletchart-y-label {
+  width: 40px;
+  text-align: right;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  color: #2E2E30;
+  margin-top: 9px;
+}
+
+.bulletchart-row {
+  display: flex;
+  vertical-align: top;
+  gap: 0px;
+  height: 32px;
+}
+
+.bulletchart-labels-row {
+  display: flex;
+  vertical-align: top;
+  gap: 0px;
+  height: 20px;
+  position: relative;
+  bottom: 18px;
 }
